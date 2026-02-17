@@ -22,7 +22,7 @@ const AdminDashboardPage = () => {
 
   const checkAuth = async () => {
     // TEMPORARY: Bypass authentication for development
-    setUserEmail('admin@hls-engineering.de');
+    setUserEmail('admin@ib-joos-gmbh.de');
     setLoading(false);
     
     /* 

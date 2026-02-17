@@ -94,7 +94,7 @@ const AdminLoginPage = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10 bg-neutral text-gray-900 border-gray-300"
-                    placeholder="admin@hls-engineering.de"
+                    placeholder="admin@ib-joos-gmbh.de"
                   />
                 </div>
               </div>

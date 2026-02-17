@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-8 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <h3 className="text-xl font-bold mb-6 text-gray-100">HLS Engineering</h3>
+            <h3 className="text-xl font-bold mb-6 text-gray-100">Ingenierbüro Joos GmbH</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Ihr Partner für professionelle Heizungs-, Lüftungs- und Sanitärplanung.
               Technische Exzellenz seit über 20 Jahren.
@@ -20,21 +20,21 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <MapPin size={20} strokeWidth={1.5} className="text-primary mt-1 flex-shrink-0" />
                 <p className="text-gray-300 text-sm">
-                  Musterstraße 123<br />
-                  12345 Berlin<br />
+                  Burgstraße 19<br />
+                  72581 Dettingen an der Erms<br />
                   Deutschland
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={20} strokeWidth={1.5} className="text-primary flex-shrink-0" />
-                <a href="tel:+4930123456789" className="text-gray-300 text-sm hover:text-primary transition-colors duration-200">
-                  +49 30 123 456 789
+                <a href="tel:0049712388261" className="text-gray-300 text-sm hover:text-primary transition-colors duration-200">
+                  +49 7123 88261
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={20} strokeWidth={1.5} className="text-primary flex-shrink-0" />
-                <a href="mailto:info@hls-engineering.de" className="text-gray-300 text-sm hover:text-primary transition-colors duration-200">
-                  info@hls-engineering.de
+                <a href="mailto:info@ib-joos-gmbh.de" className="text-gray-300 text-sm hover:text-primary transition-colors duration-200">
+                  info@ib-joos-gmbh.de
                 </a>
               </div>
             </div>
@@ -82,7 +82,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-12 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} HLS Engineering. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Ingenierbüro Joos GmbH. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>

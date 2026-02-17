@@ -2,16 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 
 // Fallback to empty strings if environment variables are not set
 // In production, these should be set via environment variables
-const supabaseUrl = typeof window !== 'undefined' && (window as any).VITE_SUPABASE_URL 
-  ? (window as any).VITE_SUPABASE_URL 
-  : '';
-const supabaseAnonKey = typeof window !== 'undefined' && (window as any).VITE_SUPABASE_ANON_KEY 
-  ? (window as any).VITE_SUPABASE_ANON_KEY 
-  : '';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 export const supabase = createClient(
-  supabaseUrl || 'https://your-project.supabase.co',
-  supabaseAnonKey || 'your-anon-key'
+  supabaseUrl,
+  supabaseAnonKey
 );
 
 // Types

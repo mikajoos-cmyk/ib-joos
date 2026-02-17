@@ -47,7 +47,7 @@ const Header = () => {
       <div className="container mx-auto px-8 lg:px-16">
         <div className="flex items-center justify-between h-20 lg:h-24">
           <Link to="/" className="flex items-center">
-            <span className="text-2xl font-bold text-gray-900">HLS Engineering</span>
+            <span className="text-2xl font-bold text-gray-900">Ingenierbüro Joos GmbH</span>
           </Link>
 
           <NavigationMenu className="hidden lg:block">

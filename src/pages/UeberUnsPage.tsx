@@ -73,7 +73,7 @@ const UeberUnsPage = () => {
                   Unsere Geschichte
                 </h2>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Seit über 20 Jahren steht HLS Engineering für technische Exzellenz im Bereich
+                  Seit über 20 Jahren steht Ingenierbüro Joos GmbH für technische Exzellenz im Bereich
                   Heizung, Lüftung und Sanitär. Was als kleines Ingenieurbüro begann, hat sich zu
                   einem führenden Unternehmen in der Branche entwickelt.
                 </p>

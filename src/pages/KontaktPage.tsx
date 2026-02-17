@@ -180,11 +180,11 @@ const KontaktPage = () => {
                       <div>
                         <p className="font-semibold text-gray-900 mb-2">Adresse</p>
                         <p className="text-gray-700 leading-relaxed">
-                          HLS Engineering GmbH
+                          Ingenierbüro Joos GmbH
                           <br />
-                          Musterstraße 123
+                          Burgstraße 19
                           <br />
-                          12345 Berlin
+                          72581 Dettingen an der Erms
                           <br />
                           Deutschland
                         </p>
@@ -196,10 +196,10 @@ const KontaktPage = () => {
                       <div>
                         <p className="font-semibold text-gray-900 mb-2">Telefon</p>
                         <a
-                          href="tel:+4930123456789"
+                          href="tel:0049712388261"
                           className="text-gray-700 hover:text-primary transition-colors duration-200"
                         >
-                          +49 30 123 456 789
+                          +49 7123 88261
                         </a>
                       </div>
                     </div>
@@ -209,10 +209,10 @@ const KontaktPage = () => {
                       <div>
                         <p className="font-semibold text-gray-900 mb-2">E-Mail</p>
                         <a
-                          href="mailto:info@hls-engineering.de"
+                          href="mailto:info@ib-joos-gmbh.de"
                           className="text-gray-700 hover:text-primary transition-colors duration-200"
                         >
-                          info@hls-engineering.de
+                          info@ib-joos-gmbh.de
                         </a>
                       </div>
                     </div>
@@ -233,14 +233,14 @@ const KontaktPage = () => {
 
                 <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2427.4926871596!2d13.404954!3d52.520008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDMxJzEyLjAiTiAxM8KwMjQnMTcuOCJF!5e0!3m2!1sen!2sde!4v1234567890&key=YOUR_API_KEY"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2642.07548475765!2d9.3527794!3d48.53178510000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479992e53b94787d%3A0x7bd3a4e62a7c873!2sIngenieur%20B%C3%BCro%20Joos%20GmbH!5e0!3m2!1sde!2sde!4v1771323944099!5m2!1sde!2sde"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="HLS Engineering Location"
+                    title="Ingenierbüro Joos GmbH Location"
                   />
                 </div>
               </motion.div>

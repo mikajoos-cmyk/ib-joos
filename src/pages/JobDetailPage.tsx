@@ -104,7 +104,7 @@ const JobDetailPage = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Briefcase size={20} strokeWidth={1.5} className="text-primary" />
-                  <span>HLS Engineering</span>
+                  <span>Ingenierbüro Joos GmbH</span>
                 </div>
               </div>
             </motion.div>
@@ -210,20 +210,20 @@ const JobDetailPage = () => {
                       <h4 className="font-semibold text-gray-900 mb-4">Kontakt</h4>
                       <div className="space-y-3 text-sm text-gray-700">
                         <p>
-                          <strong>HLS Engineering GmbH</strong>
+                          <strong>Ingenierbüro Joos GmbH</strong>
                         </p>
                         <p>Personalabteilung</p>
                         <p>
                           <a
-                            href="mailto:karriere@hls-engineering.de"
+                            href="mailto:info@ib-joos-gmbh.de"
                             className="text-primary hover:underline"
                           >
-                            karriere@hls-engineering.de
+                            info@ib-joos-gmbh.de
                           </a>
                         </p>
                         <p>
-                          <a href="tel:+4930123456789" className="text-primary hover:underline">
-                            +49 30 123 456 789
+                          <a href="tel:0049712388261" className="text-primary hover:underline">
+                            +49 7123 88261
                           </a>
                         </p>
                       </div>

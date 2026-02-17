@@ -121,8 +121,8 @@ const KontaktSection = () => {
                   <div>
                     <p className="font-medium text-gray-900 mb-1">Adresse</p>
                     <p className="text-gray-700">
-                      Musterstraße 123<br />
-                      12345 Berlin<br />
+                      Burgstraße 19<br />
+                      72581 Dettingen an der Erms<br />
                       Deutschland
                     </p>
                   </div>
@@ -133,10 +133,10 @@ const KontaktSection = () => {
                   <div>
                     <p className="font-medium text-gray-900 mb-1">Telefon</p>
                     <a
-                      href="tel:+4930123456789"
+                      href="tel:0049712388261"
                       className="text-gray-700 hover:text-primary transition-colors duration-200"
                     >
-                      +49 30 123 456 789
+                      +49 7123 88261
                     </a>
                   </div>
                 </div>
@@ -146,10 +146,10 @@ const KontaktSection = () => {
                   <div>
                     <p className="font-medium text-gray-900 mb-1">E-Mail</p>
                     <a
-                      href="mailto:info@hls-engineering.de"
+                      href="mailto:info@ib-joos-gmbh.de"
                       className="text-gray-700 hover:text-primary transition-colors duration-200"
                     >
-                      info@hls-engineering.de
+                      info@ib-joos-gmbh.de
                     </a>
                   </div>
                 </div>
@@ -158,14 +158,14 @@ const KontaktSection = () => {
 
             <div className="w-full h-64 rounded-lg overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2427.4926871596!2d13.404954!3d52.520008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDMxJzEyLjAiTiAxM8KwMjQnMTcuOCJF!5e0!3m2!1sen!2sde!4v1234567890&key=YOUR_API_KEY"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2637.2844871596!2d9.344954!3d48.530008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDMxJzQ4LjAiTiA5wrAyMCcyNy44IkU!5e0!3m2!1sen!2sde!4v1234567890&key=YOUR_API_KEY"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="HLS Engineering Location"
+                title="Ingenierbüro Joos GmbH Location"
               />
             </div>
           </motion.div>

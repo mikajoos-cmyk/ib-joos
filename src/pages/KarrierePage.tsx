@@ -61,7 +61,7 @@ const KarrierePage = () => {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-                Karriere bei HLS Engineering
+                Karriere bei Ingenierbüro Joos GmbH
               </h1>
               <p className="text-gray-700 text-lg leading-relaxed">
                 Werden Sie Teil unseres Teams und gestalten Sie die Zukunft der technischen
@@ -82,7 +82,7 @@ const KarrierePage = () => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-                Warum HLS Engineering?
+                Warum Ingenierbüro Joos GmbH?
               </h2>
               <p className="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed">
                 Bei uns erwartet Sie mehr als nur ein Job. Wir bieten ein Umfeld, in dem Sie sich
@@ -131,7 +131,7 @@ const KarrierePage = () => {
                   Unser Arbeitsumfeld
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Bei HLS Engineering arbeiten Sie in einem modernen, technisch bestens
+                  Bei Ingenierbüro Joos GmbH arbeiten Sie in einem modernen, technisch bestens
                   ausgestatteten Umfeld. Unsere Büros bieten eine angenehme Atmosphäre, die
                   Kreativität und Produktivität fördert.
                 </p>

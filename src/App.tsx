@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LeistungenPage from './pages/LeistungenPage';
 import ProjektePage from './pages/ProjektePage';
@@ -22,8 +22,11 @@ function App() {
         <Route path="/karriere" element={<KarrierePage />} />
         <Route path="/karriere/:id" element={<JobDetailPage />} />
         <Route path="/kontakt" element={<KontaktPage />} />
+        <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+        <Route path="/admin/*" element={<Navigate to="/admin/login" replace />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

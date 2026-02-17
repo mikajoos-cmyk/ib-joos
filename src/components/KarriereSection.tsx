@@ -43,7 +43,7 @@ const KarriereSection = () => {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-gray-900">
-            Karriere bei HLS Engineering
+            Karriere bei Ingenierbüro Joos GmbH
           </h2>
           <p className="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed">
             Werden Sie Teil unseres Teams und gestalten Sie die Zukunft der technischen
