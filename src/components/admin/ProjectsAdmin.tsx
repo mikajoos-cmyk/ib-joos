@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Edit, Trash2, Save, X } from 'lucide-react';
 import { supabase, type Project } from '../../lib/supabase';
+import ImageUpload from './ImageUpload';
 
 const ProjectsAdmin = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -169,16 +170,11 @@ const ProjectsAdmin = () => {
               </div>
             </div>
 
-            <div>
-              <Label htmlFor="image">Bild-URL *</Label>
-              <Input
-                id="image"
-                value={formData.image}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="mt-2"
-                placeholder="https://..."
-              />
-            </div>
+            <ImageUpload 
+              label="Projektbild *"
+              value={formData.image || ''} 
+              onChange={(url) => setFormData({ ...formData, image: url })} 
+            />
 
             <div>
               <Label htmlFor="description">Beschreibung *</Label>

@@ -21,12 +21,6 @@ const AdminDashboardPage = () => {
   }, []);
 
   const checkAuth = async () => {
-    // TEMPORARY: Bypass authentication for development
-    setUserEmail('admin@ib-joos-gmbh.de');
-    setLoading(false);
-    
-    /* 
-    // Original authentication code - uncomment for production:
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       navigate('/admin/login');
@@ -34,18 +28,11 @@ const AdminDashboardPage = () => {
       setUserEmail(session.user.email || '');
       setLoading(false);
     }
-    */
   };
 
   const handleLogout = async () => {
-    // TEMPORARY: Just navigate without actual logout
-    navigate('/admin/login');
-    
-    /*
-    // Original logout code - uncomment for production:
     await supabase.auth.signOut();
     navigate('/admin/login');
-    */
   };
 
   if (loading) {
