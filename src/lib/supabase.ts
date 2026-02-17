@@ -68,13 +68,13 @@ export const getProjects = async (): Promise<Project[]> => {
 
     if (error) {
       console.error('Error fetching projects:', error);
-      return getMockProjects();
+      return [];
     }
 
-    return data && data.length > 0 ? data : getMockProjects();
+    return data || [];
   } catch (err) {
     console.error('Error fetching projects:', err);
-    return getMockProjects();
+    return [];
   }
 };
 
@@ -88,20 +88,13 @@ export const getProjectById = async (id: string): Promise<Project | null> => {
 
     if (error) {
       console.error('Error fetching project:', error);
-      const mockProjects = getMockProjects();
-      return mockProjects.find(p => p.id === id) || null;
+      return null;
     }
 
-    if (!data) {
-      const mockProjects = getMockProjects();
-      return mockProjects.find(p => p.id === id) || null;
-    }
-
-    return data;
+    return data || null;
   } catch (err) {
     console.error('Error fetching project:', err);
-    const mockProjects = getMockProjects();
-    return mockProjects.find(p => p.id === id) || null;
+    return null;
   }
 };
 

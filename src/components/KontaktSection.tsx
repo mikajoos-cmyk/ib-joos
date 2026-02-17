@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const KontaktSection = () => {
   const ref = useRef(null);
@@ -13,6 +13,8 @@ const KontaktSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    subject: '',
     message: '',
   });
 
@@ -41,7 +43,8 @@ const KontaktSection = () => {
             Kontakt
           </h2>
           <p className="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed">
-            Haben Sie Fragen zu unseren Leistungen? Kontaktieren Sie uns – wir beraten Sie gerne.
+            Haben Sie Fragen zu unseren Leistungen oder möchten Sie ein Projekt mit uns
+            besprechen? Kontaktieren Sie uns – wir beraten Sie gerne.
           </p>
         </motion.div>
 
@@ -51,10 +54,11 @@ const KontaktSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8 }}
           >
+            <h3 className="text-2xl font-bold mb-8 text-gray-900">Schreiben Sie uns</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <Label htmlFor="name" className="text-gray-900">
-                  Name
+                  Name *
                 </Label>
                 <Input
                   id="name"
@@ -69,7 +73,7 @@ const KontaktSection = () => {
 
               <div>
                 <Label htmlFor="email" className="text-gray-900">
-                  E-Mail
+                  E-Mail *
                 </Label>
                 <Input
                   id="email"
@@ -83,8 +87,37 @@ const KontaktSection = () => {
               </div>
 
               <div>
+                <Label htmlFor="phone" className="text-gray-900">
+                  Telefon
+                </Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="subject" className="text-gray-900">
+                  Betreff *
+                </Label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  required
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                />
+              </div>
+
+              <div>
                 <Label htmlFor="message" className="text-gray-900">
-                  Nachricht
+                  Nachricht *
                 </Label>
                 <Textarea
                   id="message"
@@ -114,15 +147,25 @@ const KontaktSection = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-semibold mb-6 text-gray-900">Kontaktinformationen</h3>
+              <h3 className="text-2xl font-bold mb-8 text-gray-900">
+                Kontaktinformationen
+              </h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <MapPin size={24} strokeWidth={1.5} className="text-primary mt-1 flex-shrink-0" />
+                  <MapPin
+                    size={24}
+                    strokeWidth={1.5}
+                    className="text-primary mt-1 flex-shrink-0"
+                  />
                   <div>
-                    <p className="font-medium text-gray-900 mb-1">Adresse</p>
-                    <p className="text-gray-700">
-                      Burgstraße 19<br />
-                      72581 Dettingen an der Erms<br />
+                    <p className="font-semibold text-gray-900 mb-2">Adresse</p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Ingenierbüro Joos GmbH
+                      <br />
+                      Burgstraße 19
+                      <br />
+                      72581 Dettingen an der Erms
+                      <br />
                       Deutschland
                     </p>
                   </div>
@@ -131,7 +174,7 @@ const KontaktSection = () => {
                 <div className="flex items-start gap-4">
                   <Phone size={24} strokeWidth={1.5} className="text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-gray-900 mb-1">Telefon</p>
+                    <p className="font-semibold text-gray-900 mb-2">Telefon</p>
                     <a
                       href="tel:0049712388261"
                       className="text-gray-700 hover:text-primary transition-colors duration-200"
@@ -144,7 +187,7 @@ const KontaktSection = () => {
                 <div className="flex items-start gap-4">
                   <Mail size={24} strokeWidth={1.5} className="text-primary flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-gray-900 mb-1">E-Mail</p>
+                    <p className="font-semibold text-gray-900 mb-2">E-Mail</p>
                     <a
                       href="mailto:info@ib-joos-gmbh.de"
                       className="text-gray-700 hover:text-primary transition-colors duration-200"
@@ -153,12 +196,24 @@ const KontaktSection = () => {
                     </a>
                   </div>
                 </div>
+
+                <div className="flex items-start gap-4">
+                  <Clock size={24} strokeWidth={1.5} className="text-primary flex-shrink-0" />
+                  <div>
+                    <p className="font-semibold text-gray-900 mb-2">Öffnungszeiten</p>
+                    <p className="text-gray-700 leading-relaxed">
+                      Montag - Freitag: 08:00 - 17:00 Uhr
+                      <br />
+                      Samstag - Sonntag: Geschlossen
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="w-full h-64 rounded-lg overflow-hidden">
+            <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2637.2844871596!2d9.344954!3d48.530008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDMxJzQ4LjAiTiA5wrAyMCcyNy44IkU!5e0!3m2!1sen!2sde!4v1234567890&key=YOUR_API_KEY"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2642.07548475765!2d9.3527794!3d48.53178510000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479992e53b94787d%3A0x7bd3a4e62a7c873!2sIngenieur%20B%C3%BCro%20Joos%20GmbH!5e0!3m2!1sde!2sde!4v1771323944099!5m2!1sde!2sde"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

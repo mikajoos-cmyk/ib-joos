@@ -9,7 +9,7 @@ export default defineConfig({
   publicDir: "./static",
   base: "/",
   server: {
-    port: 5173,
+    port: 5174,
     https: false,
     strictPort: true,
   },
