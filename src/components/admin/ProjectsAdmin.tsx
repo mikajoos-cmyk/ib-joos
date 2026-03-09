@@ -35,37 +35,48 @@ const ProjectsAdmin = () => {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (!error && data) {
+    if (error) {
+      console.error('Error loading projects:', error);
+      alert('Fehler beim Laden der Projekte: ' + error.message);
+    } else if (data) {
       setProjects(data);
     }
     setLoading(false);
   };
 
   const handleSave = async () => {
-    if (editingId === 'new') {
-      const { error } = await supabase.from('projects').insert([formData]);
-      if (!error) {
+    try {
+      if (editingId === 'new') {
+        const { error } = await supabase.from('projects').insert([formData]);
+        if (error) throw error;
+        
+        loadProjects();
+        setEditingId(null);
+        resetForm();
+      } else if (editingId) {
+        const { error } = await supabase
+          .from('projects')
+          .update(formData)
+          .eq('id', editingId);
+        if (error) throw error;
+        
         loadProjects();
         setEditingId(null);
         resetForm();
       }
-    } else if (editingId) {
-      const { error } = await supabase
-        .from('projects')
-        .update(formData)
-        .eq('id', editingId);
-      if (!error) {
-        loadProjects();
-        setEditingId(null);
-        resetForm();
-      }
+    } catch (error: any) {
+      console.error('Error saving project:', error);
+      alert('Fehler beim Speichern: ' + (error.message || 'Unbekannter Fehler'));
     }
   };
 
   const handleDelete = async (id: string) => {
     if (confirm('Möchten Sie dieses Projekt wirklich löschen?')) {
       const { error } = await supabase.from('projects').delete().eq('id', id);
-      if (!error) {
+      if (error) {
+        console.error('Error deleting project:', error);
+        alert('Fehler beim Löschen: ' + error.message);
+      } else {
         loadProjects();
       }
     }

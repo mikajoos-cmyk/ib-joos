@@ -34,37 +34,48 @@ const JobsAdmin = () => {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (!error && data) {
+    if (error) {
+      console.error('Error loading jobs:', error);
+      alert('Fehler beim Laden der Stellenangebote: ' + error.message);
+    } else if (data) {
       setJobs(data);
     }
     setLoading(false);
   };
 
   const handleSave = async () => {
-    if (editingId === 'new') {
-      const { error } = await supabase.from('job_positions').insert([formData]);
-      if (!error) {
+    try {
+      if (editingId === 'new') {
+        const { error } = await supabase.from('job_positions').insert([formData]);
+        if (error) throw error;
+        
+        loadJobs();
+        setEditingId(null);
+        resetForm();
+      } else if (editingId) {
+        const { error } = await supabase
+          .from('job_positions')
+          .update(formData)
+          .eq('id', editingId);
+        if (error) throw error;
+        
         loadJobs();
         setEditingId(null);
         resetForm();
       }
-    } else if (editingId) {
-      const { error } = await supabase
-        .from('job_positions')
-        .update(formData)
-        .eq('id', editingId);
-      if (!error) {
-        loadJobs();
-        setEditingId(null);
-        resetForm();
-      }
+    } catch (error: any) {
+      console.error('Error saving job:', error);
+      alert('Fehler beim Speichern: ' + (error.message || 'Unbekannter Fehler'));
     }
   };
 
   const handleDelete = async (id: string) => {
     if (confirm('Möchten Sie diese Stellenanzeige wirklich löschen?')) {
       const { error } = await supabase.from('job_positions').delete().eq('id', id);
-      if (!error) {
+      if (error) {
+        console.error('Error deleting job:', error);
+        alert('Fehler beim Löschen: ' + error.message);
+      } else {
         loadJobs();
       }
     }

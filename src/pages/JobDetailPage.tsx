@@ -104,7 +104,7 @@ const JobDetailPage = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Briefcase size={20} strokeWidth={1.5} className="text-primary" />
-                  <span>Ingenierbüro Joos GmbH</span>
+                  <span>Ingenieurbüro Joos GmbH</span>
                 </div>
               </div>
             </motion.div>
@@ -210,7 +210,7 @@ const JobDetailPage = () => {
                       <h4 className="font-semibold text-gray-900 mb-4">Kontakt</h4>
                       <div className="space-y-3 text-sm text-gray-700">
                         <p>
-                          <strong>Ingenierbüro Joos GmbH</strong>
+                          <strong>Ingenieurbüro Joos GmbH</strong>
                         </p>
                         <p>Personalabteilung</p>
                         <p>

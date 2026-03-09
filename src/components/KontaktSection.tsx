@@ -160,7 +160,7 @@ const KontaktSection = () => {
                   <div>
                     <p className="font-semibold text-gray-900 mb-2">Adresse</p>
                     <p className="text-gray-700 leading-relaxed">
-                      Ingenierbüro Joos GmbH
+                      Ingenieurbüro Joos GmbH
                       <br />
                       Burgstraße 19
                       <br />
@@ -220,7 +220,7 @@ const KontaktSection = () => {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ingenierbüro Joos GmbH Location"
+                title="Ingenieurbüro Joos GmbH Location"
               />
             </div>
           </motion.div>

@@ -73,9 +73,8 @@ const UeberUnsPage = () => {
                   Unsere Geschichte
                 </h2>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Seit über 20 Jahren steht Ingenierbüro Joos GmbH für technische Exzellenz im Bereich
-                  Heizung, Lüftung und Sanitär. Was als kleines Ingenieurbüro begann, hat sich zu
-                  einem führenden Unternehmen in der Branche entwickelt.
+                  Seit über 20 Jahren steht Ingenieurbüro Joos GmbH für technische Exzellenz im Bereich
+                  Heizung, Lüftung und Sanitär.
                 </p>
                 <p className="text-gray-700 text-lg leading-relaxed mb-6">
                   Unser Erfolg basiert auf der Kombination aus fundiertem Fachwissen, innovativen
@@ -83,11 +82,7 @@ const UeberUnsPage = () => {
                   erfolgreich realisiert – von Wohngebäuden über Gewerbeimmobilien bis hin zu
                   komplexen Industrieanlagen.
                 </p>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  Heute beschäftigen wir über 50 Mitarbeiter und sind stolz darauf, zu den
-                  führenden Unternehmen in unserem Bereich zu gehören. Dabei bleiben wir unseren
-                  Werten treu: Qualität, Zuverlässigkeit und Kundenzufriedenheit.
-                </p>
+
               </motion.div>
 
               <motion.div
@@ -167,7 +162,7 @@ const UeberUnsPage = () => {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
                 <div className="text-center">
-                  <p className="text-5xl font-bold text-primary mb-2">50+</p>
+                  <p className="text-5xl font-bold text-primary mb-2">3</p>
                   <p className="text-gray-700 text-lg">Mitarbeiter</p>
                 </div>
                 <div className="text-center">

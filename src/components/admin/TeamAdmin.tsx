@@ -30,37 +30,48 @@ const TeamAdmin = () => {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (!error && data) {
+    if (error) {
+      console.error('Error loading team members:', error);
+      alert('Fehler beim Laden des Teams: ' + error.message);
+    } else if (data) {
       setMembers(data);
     }
     setLoading(false);
   };
 
   const handleSave = async () => {
-    if (editingId === 'new') {
-      const { error } = await supabase.from('team_members').insert([formData]);
-      if (!error) {
+    try {
+      if (editingId === 'new') {
+        const { error } = await supabase.from('team_members').insert([formData]);
+        if (error) throw error;
+        
+        loadMembers();
+        setEditingId(null);
+        resetForm();
+      } else if (editingId) {
+        const { error } = await supabase
+          .from('team_members')
+          .update(formData)
+          .eq('id', editingId);
+        if (error) throw error;
+        
         loadMembers();
         setEditingId(null);
         resetForm();
       }
-    } else if (editingId) {
-      const { error } = await supabase
-        .from('team_members')
-        .update(formData)
-        .eq('id', editingId);
-      if (!error) {
-        loadMembers();
-        setEditingId(null);
-        resetForm();
-      }
+    } catch (error: any) {
+      console.error('Error saving team member:', error);
+      alert('Fehler beim Speichern: ' + (error.message || 'Unbekannter Fehler'));
     }
   };
 
   const handleDelete = async (id: string) => {
     if (confirm('Möchten Sie dieses Team-Mitglied wirklich löschen?')) {
       const { error } = await supabase.from('team_members').delete().eq('id', id);
-      if (!error) {
+      if (error) {
+        console.error('Error deleting team member:', error);
+        alert('Fehler beim Löschen: ' + error.message);
+      } else {
         loadMembers();
       }
     }

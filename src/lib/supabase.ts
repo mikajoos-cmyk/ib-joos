@@ -107,13 +107,13 @@ export const getJobPositions = async (): Promise<JobPosition[]> => {
 
     if (error) {
       console.error('Error fetching job positions:', error);
-      return getMockJobPositions();
+      return [];
     }
 
-    return data && data.length > 0 ? data : getMockJobPositions();
+    return data || [];
   } catch (err) {
     console.error('Error fetching job positions:', err);
-    return getMockJobPositions();
+    return [];
   }
 };
 
@@ -127,20 +127,13 @@ export const getJobPositionById = async (id: string): Promise<JobPosition | null
 
     if (error) {
       console.error('Error fetching job position:', error);
-      const mockJobs = getMockJobPositions();
-      return mockJobs.find(j => j.id === id) || null;
+      return null;
     }
 
-    if (!data) {
-      const mockJobs = getMockJobPositions();
-      return mockJobs.find(j => j.id === id) || null;
-    }
-
-    return data;
+    return data || null;
   } catch (err) {
     console.error('Error fetching job position:', err);
-    const mockJobs = getMockJobPositions();
-    return mockJobs.find(j => j.id === id) || null;
+    return null;
   }
 };
 
@@ -292,142 +285,6 @@ const getMockProjects = (): Project[] => {
       ],
       challenges: 'Die großen Besucherströme und unterschiedlichen Nutzungsbereiche erforderten ein flexibles und leistungsstarkes System. Die öffentlichen Sanitäranlagen mussten besonders robust und hygienisch sein, während die Gastronomie-Bereiche spezielle Anforderungen stellten.',
       solution: 'Eine zentrale Klimaanlage mit mehreren Kältemaschinen sorgt für optimale Temperaturen in allen Bereichen. Die zonenweise Steuerung ermöglicht eine bedarfsgerechte Klimatisierung. Die Sanitäranlagen wurden mit berührungslosen Armaturen und automatischer Reinigung ausgestattet. Die Gebäudeleittechnik optimiert den Betrieb kontinuierlich.',
-    },
-  ];
-};
-
-const getMockJobPositions = (): JobPosition[] => {
-  return [
-    {
-      id: 'job-1',
-      title: 'Projektingenieur HLS (m/w/d)',
-      location: 'Berlin',
-      type: 'Vollzeit',
-      description: 'Wir suchen einen erfahrenen Projektingenieur für die Planung und Umsetzung von HLS-Projekten. Sie übernehmen die technische Leitung von Projekten und arbeiten eng mit unserem Team zusammen.',
-      responsibilities: [
-        'Eigenverantwortliche Planung und Projektierung von HLS-Anlagen',
-        'Technische Leitung von Projekten von der Konzeption bis zur Inbetriebnahme',
-        'Koordination mit Architekten, Fachplanern und ausführenden Firmen',
-        'Erstellung von Ausschreibungen und Leistungsverzeichnissen',
-        'Bauüberwachung und Qualitätskontrolle',
-        'Beratung unserer Kunden in technischen Fragen',
-      ],
-      requirements: [
-        'Abgeschlossenes Studium im Bereich Versorgungstechnik, TGA oder vergleichbar',
-        'Mehrjährige Berufserfahrung in der HLS-Planung',
-        'Fundierte Kenntnisse in CAD-Software (AutoCAD, Revit)',
-        'Kenntnisse der einschlägigen Normen und Vorschriften',
-        'Selbstständige und strukturierte Arbeitsweise',
-        'Teamfähigkeit und Kommunikationsstärke',
-      ],
-      benefits: [
-        'Attraktives Gehalt und leistungsgerechte Vergütung',
-        'Flexible Arbeitszeiten und Homeoffice-Möglichkeiten',
-        'Moderne Arbeitsausstattung und Software',
-        'Weiterbildungsmöglichkeiten und Zertifizierungen',
-        'Betriebliche Altersvorsorge',
-        'Firmenwagen (nach Absprache)',
-        'Kollegiales Team und flache Hierarchien',
-      ],
-      salary: '55.000 - 75.000 € p.a.',
-      startDate: 'Ab sofort oder nach Vereinbarung',
-    },
-    {
-      id: 'job-2',
-      title: 'Technischer Zeichner HLS (m/w/d)',
-      location: 'Berlin',
-      type: 'Vollzeit',
-      description: 'Zur Verstärkung unseres Teams suchen wir einen technischen Zeichner mit Erfahrung in CAD-Software. Sie erstellen technische Zeichnungen und Pläne für unsere Projekte.',
-      responsibilities: [
-        'Erstellung von technischen Zeichnungen und Plänen für HLS-Anlagen',
-        'Ausarbeitung von Entwurfs- und Ausführungsplanungen',
-        'Erstellung von Detailzeichnungen und Isometrien',
-        'Pflege und Verwaltung der CAD-Bibliotheken',
-        'Zusammenarbeit mit Ingenieuren und Projektleitern',
-        'Qualitätskontrolle der erstellten Pläne',
-      ],
-      requirements: [
-        'Abgeschlossene Ausbildung als Technischer Zeichner oder vergleichbar',
-        'Erfahrung in der Erstellung von HLS-Plänen',
-        'Sehr gute Kenntnisse in AutoCAD und/oder Revit',
-        'Kenntnisse der technischen Regelwerke',
-        'Sorgfältige und präzise Arbeitsweise',
-        'Teamfähigkeit und Zuverlässigkeit',
-      ],
-      benefits: [
-        'Unbefristeter Arbeitsvertrag',
-        'Geregelte Arbeitszeiten ohne Schichtdienst',
-        'Moderne CAD-Arbeitsplätze',
-        'Schulungen und Weiterbildungen',
-        'Betriebliche Altersvorsorge',
-        'Angenehmes Arbeitsklima',
-      ],
-      salary: '38.000 - 48.000 € p.a.',
-      startDate: 'Ab sofort',
-    },
-    {
-      id: 'job-3',
-      title: 'Bauleiter HLS (m/w/d)',
-      location: 'Hamburg',
-      type: 'Vollzeit',
-      description: 'Für unsere Projekte in Hamburg suchen wir einen erfahrenen Bauleiter. Sie koordinieren die Bauausführung und sind Ansprechpartner für alle Beteiligten vor Ort.',
-      responsibilities: [
-        'Bauleitung und Koordination der HLS-Gewerke',
-        'Überwachung der Bauausführung hinsichtlich Qualität, Kosten und Terminen',
-        'Führung und Koordination der ausführenden Firmen',
-        'Durchführung von Baubesprechungen',
-        'Abnahme und Dokumentation der ausgeführten Leistungen',
-        'Mängelmanagement und Nachtragsbearbeitung',
-      ],
-      requirements: [
-        'Abgeschlossene Ausbildung als Meister oder Techniker im SHK-Bereich',
-        'Mehrjährige Erfahrung in der Bauleitung',
-        'Fundierte Kenntnisse der VOB und HOAI',
-        'Durchsetzungsvermögen und Organisationstalent',
-        'Führerschein Klasse B',
-        'Reisebereitschaft im Raum Hamburg',
-      ],
-      benefits: [
-        'Verantwortungsvolle Position mit Gestaltungsspielraum',
-        'Firmenwagen auch zur privaten Nutzung',
-        'Leistungsgerechte Vergütung',
-        'Moderne technische Ausstattung',
-        'Weiterbildungsmöglichkeiten',
-        'Betriebliche Altersvorsorge',
-      ],
-      salary: '50.000 - 65.000 € p.a.',
-      startDate: 'Nach Vereinbarung',
-    },
-    {
-      id: 'job-4',
-      title: 'Auszubildender Anlagenmechaniker SHK (m/w/d)',
-      location: 'Berlin',
-      type: 'Ausbildung',
-      description: 'Starte deine Karriere mit einer Ausbildung zum Anlagenmechaniker für Sanitär-, Heizungs- und Klimatechnik. Wir bieten eine fundierte Ausbildung in einem modernen Unternehmen.',
-      responsibilities: [
-        'Erlernen der Installation von Heizungs-, Lüftungs- und Sanitäranlagen',
-        'Wartung und Instandhaltung von technischen Anlagen',
-        'Kundenberatung und -betreuung',
-        'Fehlerdiagnose und Störungsbehebung',
-        'Dokumentation der durchgeführten Arbeiten',
-      ],
-      requirements: [
-        'Guter Hauptschul- oder Realschulabschluss',
-        'Interesse an Technik und handwerklichem Arbeiten',
-        'Sorgfältige und zuverlässige Arbeitsweise',
-        'Teamfähigkeit und Lernbereitschaft',
-        'Gute Mathematik- und Physikkenntnisse',
-      ],
-      benefits: [
-        'Ausbildungsvergütung nach Tarif',
-        'Übernahmegarantie bei guten Leistungen',
-        'Moderne Ausbildungswerkstatt',
-        'Erfahrene Ausbilder und Mentoren',
-        'Prüfungsvorbereitung und Nachhilfe',
-        'Azubi-Events und Teambuilding',
-      ],
-      salary: 'Nach Tarifvertrag',
-      startDate: '01.08.2026',
     },
   ];
 };

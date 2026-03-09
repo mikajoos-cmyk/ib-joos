@@ -1,4 +1,4 @@
-# Ingenierbüro Joos GmbH Website
+# Ingenieurbüro Joos GmbH Website
 
 Moderne Website für ein Ingenieurbüro im Heizungs-, Lüftungs- und Sanitärbereich.
 
@@ -98,6 +98,24 @@ CREATE POLICY "Allow public read access on projects" ON projects FOR SELECT USIN
 CREATE POLICY "Allow public read access on job_positions" ON job_positions FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on team_members" ON team_members FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on services" ON services FOR SELECT USING (true);
+
+-- Policies für authentifizierte Benutzer (Admin-Zugriff)
+-- Erlaubt INSERT, UPDATE und DELETE für angemeldete Benutzer
+CREATE POLICY "Allow authenticated insert on projects" ON projects FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update on projects" ON projects FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete on projects" ON projects FOR DELETE TO authenticated USING (true);
+
+CREATE POLICY "Allow authenticated insert on job_positions" ON job_positions FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update on job_positions" ON job_positions FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete on job_positions" ON job_positions FOR DELETE TO authenticated USING (true);
+
+CREATE POLICY "Allow authenticated insert on team_members" ON team_members FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update on team_members" ON team_members FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete on team_members" ON team_members FOR DELETE TO authenticated USING (true);
+
+CREATE POLICY "Allow authenticated insert on services" ON services FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Allow authenticated update on services" ON services FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated delete on services" ON services FOR DELETE TO authenticated USING (true);
 ```
 
 ### 4. Beispieldaten einfügen (optional)

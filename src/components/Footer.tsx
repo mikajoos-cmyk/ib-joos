@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-8 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <h3 className="text-xl font-bold mb-6 text-gray-100">Ingenierbüro Joos GmbH</h3>
+            <h3 className="text-xl font-bold mb-6 text-gray-100">Ingenieurbüro Joos GmbH</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Ihr Partner für professionelle Heizungs-, Lüftungs- und Sanitärplanung.
               Technische Exzellenz seit über 20 Jahren.
@@ -82,7 +82,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-12 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Ingenierbüro Joos GmbH. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Ingenieurbüro Joos GmbH. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>

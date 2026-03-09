@@ -31,37 +31,48 @@ const ServicesAdmin = () => {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (!error && data) {
+    if (error) {
+      console.error('Error loading services:', error);
+      alert('Fehler beim Laden der Leistungen: ' + error.message);
+    } else if (data) {
       setServices(data);
     }
     setLoading(false);
   };
 
   const handleSave = async () => {
-    if (editingId === 'new') {
-      const { error } = await supabase.from('services').insert([formData]);
-      if (!error) {
+    try {
+      if (editingId === 'new') {
+        const { error } = await supabase.from('services').insert([formData]);
+        if (error) throw error;
+        
+        loadServices();
+        setEditingId(null);
+        resetForm();
+      } else if (editingId) {
+        const { error } = await supabase
+          .from('services')
+          .update(formData)
+          .eq('id', editingId);
+        if (error) throw error;
+        
         loadServices();
         setEditingId(null);
         resetForm();
       }
-    } else if (editingId) {
-      const { error } = await supabase
-        .from('services')
-        .update(formData)
-        .eq('id', editingId);
-      if (!error) {
-        loadServices();
-        setEditingId(null);
-        resetForm();
-      }
+    } catch (error: any) {
+      console.error('Error saving service:', error);
+      alert('Fehler beim Speichern: ' + (error.message || 'Unbekannter Fehler'));
     }
   };
 
   const handleDelete = async (id: string) => {
     if (confirm('Möchten Sie diese Leistung wirklich löschen?')) {
       const { error } = await supabase.from('services').delete().eq('id', id);
-      if (!error) {
+      if (error) {
+        console.error('Error deleting service:', error);
+        alert('Fehler beim Löschen: ' + error.message);
+      } else {
         loadServices();
       }
     }
