@@ -42,8 +42,16 @@ const ServicesAdmin = () => {
 
   const handleSave = async () => {
     try {
+      const cleanedFormData = {
+        ...formData,
+        details: formData.details?.filter(item => item.trim() !== '') || []
+      };
+
       if (editingId === 'new') {
-        const { error } = await supabase.from('services').insert([formData]);
+        const { error } = await supabase.from('services').insert([{
+          ...cleanedFormData,
+          id: crypto.randomUUID()
+        }]);
         if (error) throw error;
         
         loadServices();
@@ -52,7 +60,7 @@ const ServicesAdmin = () => {
       } else if (editingId) {
         const { error } = await supabase
           .from('services')
-          .update(formData)
+          .update(cleanedFormData)
           .eq('id', editingId);
         if (error) throw error;
         
@@ -106,7 +114,7 @@ const ServicesAdmin = () => {
   const handleArrayChange = (field: 'details', value: string) => {
     setFormData({
       ...formData,
-      [field]: value.split('\n').filter(item => item.trim() !== ''),
+      [field]: value.split('\n'),
     });
   };
 

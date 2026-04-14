@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Briefcase, Users, Wrench, FolderOpen } from 'lucide-react';
+import { LogOut, Briefcase, Users, Wrench, FolderOpen, Mail } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import ProjectsAdmin from '../components/admin/ProjectsAdmin';
 import JobsAdmin from '../components/admin/JobsAdmin';
 import ServicesAdmin from '../components/admin/ServicesAdmin';
 import TeamAdmin from '../components/admin/TeamAdmin';
+import ContactAdmin from '../components/admin/ContactAdmin';
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const AdminDashboardPage = () => {
           transition={{ duration: 0.8 }}
         >
           <Tabs defaultValue="projects" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
+            <TabsList className="grid w-full grid-cols-5 mb-8">
               <TabsTrigger value="projects" className="flex items-center gap-2">
                 <FolderOpen size={20} strokeWidth={1.5} />
                 Projekte
@@ -87,6 +88,10 @@ const AdminDashboardPage = () => {
               <TabsTrigger value="team" className="flex items-center gap-2">
                 <Users size={20} strokeWidth={1.5} />
                 Team
+              </TabsTrigger>
+              <TabsTrigger value="contact" className="flex items-center gap-2">
+                <Mail size={20} strokeWidth={1.5} />
+                Anfragen
               </TabsTrigger>
             </TabsList>
 
@@ -104,6 +109,10 @@ const AdminDashboardPage = () => {
 
             <TabsContent value="team">
               <TeamAdmin />
+            </TabsContent>
+
+            <TabsContent value="contact">
+              <ContactAdmin />
             </TabsContent>
           </Tabs>
         </motion.div>

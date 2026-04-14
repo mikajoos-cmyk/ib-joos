@@ -87,17 +87,38 @@ CREATE TABLE services (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Kontaktanfragen Tabelle
+CREATE TABLE contact_submissions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Row Level Security aktivieren
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
 ALTER TABLE job_positions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE team_members ENABLE ROW LEVEL SECURITY;
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contact_submissions ENABLE ROW LEVEL SECURITY;
 
 -- Policies für öffentlichen Lesezugriff
 CREATE POLICY "Allow public read access on projects" ON projects FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on job_positions" ON job_positions FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on team_members" ON team_members FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on services" ON services FOR SELECT USING (true);
+
+-- Policy für das Einfügen von Kontaktanfragen (Öffentlich)
+CREATE POLICY "Allow public insert on contact_submissions" ON contact_submissions FOR INSERT WITH CHECK (true);
+
+-- Policy für das Lesen von Kontaktanfragen (Nur Authentifizierte Benutzer/Admins)
+CREATE POLICY "Allow authenticated select on contact_submissions" ON contact_submissions FOR SELECT TO authenticated USING (true);
+
+-- Policy für das Löschen von Kontaktanfragen (Nur Authentifizierte Benutzer/Admins)
+CREATE POLICY "Allow authenticated delete on contact_submissions" ON contact_submissions FOR DELETE TO authenticated USING (true);
 
 -- Policies für authentifizierte Benutzer (Admin-Zugriff)
 -- Erlaubt INSERT, UPDATE und DELETE für angemeldete Benutzer
@@ -168,6 +189,29 @@ npm run dev
 
 Die Website ist dann unter [http://localhost:5173/](http://localhost:5173/) erreichbar.
 
+### 6. Supabase Storage konfigurieren
+
+Um Bilder hochladen zu können, müssen Sie einen Storage-Bucket in Supabase erstellen und die entsprechenden RLS-Richtlinien (Row Level Security) festlegen.
+
+1. Gehen Sie in Ihrem Supabase-Projekt zu "Storage".
+2. Erstellen Sie einen neuen Bucket mit dem Namen `ib_images`.
+3. Stellen Sie sicher, dass der Bucket auf "Public" gesetzt ist (oder passen Sie die Richtlinien entsprechend an).
+4. Führen Sie folgende SQL-Befehle in Ihrem Supabase SQL Editor aus, um den Zugriff für authentifizierte Benutzer zu erlauben:
+
+```sql
+-- Erlaubt das Lesen von Bildern für alle (öffentlich)
+CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'ib_images');
+
+-- Erlaubt authentifizierten Benutzern das Hochladen von Bildern
+CREATE POLICY "Allow authenticated upload" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'ib_images');
+
+-- Erlaubt authentifizierten Benutzern das Aktualisieren von Bildern
+CREATE POLICY "Allow authenticated update" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'ib_images');
+
+-- Erlaubt authentifizierten Benutzern das Löschen von Bildern
+CREATE POLICY "Allow authenticated delete" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'ib_images');
+```
+
 ## Projekt-Struktur
 
 - `/src/pages` - Alle Seiten (Home, Leistungen, Projekte, etc.)
@@ -215,6 +259,15 @@ Die Website ist dann unter [http://localhost:5173/](http://localhost:5173/) erre
 - `icon` - Icon-Name (Flame, Wind, Droplet, Zap)
 - `image` - Bild-URL
 - `details` - Array von Details
+
+### contact_submissions
+- `id` - UUID (Primary Key)
+- `name` - Name des Absenders
+- `email` - E-Mail des Absenders
+- `phone` - Telefonnummer des Absenders (optional)
+- `subject` - Betreff der Nachricht
+- `message` - Inhalt der Nachricht
+- `created_at` - Zeitstempel der Erstellung
 
 ## Admin Panel
 

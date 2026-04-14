@@ -10,6 +10,7 @@ import ImageUpload from './ImageUpload';
 
 const ProjectsAdmin = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Project>>({
@@ -40,14 +41,25 @@ const ProjectsAdmin = () => {
       alert('Fehler beim Laden der Projekte: ' + error.message);
     } else if (data) {
       setProjects(data);
+      // Extract unique categories
+      const uniqueCategories = Array.from(new Set(data.map(p => p.category).filter(Boolean)));
+      setCategories(uniqueCategories);
     }
     setLoading(false);
   };
 
   const handleSave = async () => {
     try {
+      const cleanedFormData = {
+        ...formData,
+        details: formData.details?.filter(item => item.trim() !== '') || []
+      };
+
       if (editingId === 'new') {
-        const { error } = await supabase.from('projects').insert([formData]);
+        const { error } = await supabase.from('projects').insert([{
+          ...cleanedFormData,
+          id: crypto.randomUUID()
+        }]);
         if (error) throw error;
         
         loadProjects();
@@ -56,7 +68,7 @@ const ProjectsAdmin = () => {
       } else if (editingId) {
         const { error } = await supabase
           .from('projects')
-          .update(formData)
+          .update(cleanedFormData)
           .eq('id', editingId);
         if (error) throw error;
         
@@ -114,7 +126,7 @@ const ProjectsAdmin = () => {
   const handleArrayChange = (field: 'details', value: string) => {
     setFormData({
       ...formData,
-      [field]: value.split('\n').filter(item => item.trim() !== ''),
+      [field]: value.split('\n'),
     });
   };
 
@@ -163,11 +175,17 @@ const ProjectsAdmin = () => {
                 <Label htmlFor="category">Kategorie *</Label>
                 <Input
                   id="category"
+                  list="category-list"
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   className="mt-2"
                   placeholder="z.B. Gewerbe, Wohnbau, Industrie"
                 />
+                <datalist id="category-list">
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat} />
+                  ))}
+                </datalist>
               </div>
               <div>
                 <Label htmlFor="year">Jahr *</Label>

@@ -35,7 +35,7 @@ export interface JobPosition {
   requirements?: string[];
   benefits?: string[];
   salary?: string;
-  startDate?: string;
+  start_date?: string;
   created_at?: string;
 }
 
@@ -58,6 +58,16 @@ export interface Service {
   created_at?: string;
 }
 
+export interface ContactSubmission {
+  id?: string;
+  name: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  created_at?: string;
+}
+
 // API Functions
 export const getProjects = async (): Promise<Project[]> => {
   try {
@@ -75,6 +85,62 @@ export const getProjects = async (): Promise<Project[]> => {
   } catch (err) {
     console.error('Error fetching projects:', err);
     return [];
+  }
+};
+
+export const submitContactForm = async (submission: ContactSubmission): Promise<{ success: boolean; error?: any }> => {
+  try {
+    const { error } = await supabase
+      .from('contact_submissions')
+      .insert([submission]);
+
+    if (error) {
+      console.error('Error submitting contact form:', error);
+      return { success: false, error };
+    }
+
+    return { success: true };
+  } catch (err) {
+    console.error('Error submitting contact form:', err);
+    return { success: false, error: err };
+  }
+};
+
+export const getContactSubmissions = async (): Promise<ContactSubmission[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching contact submissions:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error('Error fetching contact submissions:', err);
+    return [];
+  }
+};
+
+export const deleteContactSubmission = async (id: string): Promise<boolean> => {
+  try {
+    const { error } = await supabase
+      .from('contact_submissions')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting contact submission:', error);
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    console.error('Error deleting contact submission:', err);
+    return false;
   }
 };
 

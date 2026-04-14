@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
+import { submitContactForm } from '@/lib/supabase';
 
 const KontaktPage = () => {
   const location = useLocation();
@@ -18,6 +19,8 @@ const KontaktPage = () => {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,9 +34,31 @@ const KontaktPage = () => {
     }
   }, [location]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const { success } = await submitContactForm(formData);
+      if (success) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -75,89 +100,125 @@ const KontaktPage = () => {
                 transition={{ duration: 0.8 }}
               >
                 <h2 className="text-3xl font-bold mb-8 text-gray-900">Schreiben Sie uns</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <Label htmlFor="name" className="text-gray-900">
-                      Name *
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="mt-2 bg-neutral text-gray-900 border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="email" className="text-gray-900">
-                      E-Mail *
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="mt-2 bg-neutral text-gray-900 border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="phone" className="text-gray-900">
-                      Telefon
-                    </Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="mt-2 bg-neutral text-gray-900 border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="subject" className="text-gray-900">
-                      Betreff *
-                    </Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="mt-2 bg-neutral text-gray-900 border-gray-300"
-                    />
-                  </div>
-
-                  <div>
-                    <Label htmlFor="message" className="text-gray-900">
-                      Nachricht *
-                    </Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="mt-2 bg-neutral text-gray-900 border-gray-300"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-all duration-200 ease-in-out text-base"
+                
+                {submitStatus === 'success' ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-green-50 border border-green-200 p-8 rounded-lg text-center space-y-4"
                   >
-                    Nachricht senden
-                  </Button>
-                </form>
+                    <div className="flex justify-center">
+                      <CheckCircle2 className="text-green-500 w-16 h-16" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-green-800">Vielen Dank!</h3>
+                    <p className="text-green-700">
+                      Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns so schnell wie möglich bei Ihnen melden.
+                    </p>
+                    <Button 
+                      onClick={() => setSubmitStatus('idle')}
+                      variant="outline"
+                      className="mt-4 border-green-300 text-green-800 hover:bg-green-100"
+                    >
+                      Weitere Nachricht senden
+                    </Button>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {submitStatus === 'error' && (
+                      <div className="bg-red-50 border border-red-200 p-4 rounded-md flex items-center gap-3 text-red-800">
+                        <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                        <p>Es gab ein Problem beim Senden Ihrer Nachricht. Bitte versuchen Sie es später noch einmal.</p>
+                      </div>
+                    )}
+                    <div>
+                      <Label htmlFor="name" className="text-gray-900">
+                        Name *
+                      </Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="email" className="text-gray-900">
+                        E-Mail *
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="phone" className="text-gray-900">
+                        Telefon
+                      </Label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="subject" className="text-gray-900">
+                        Betreff *
+                      </Label>
+                      <Input
+                        id="subject"
+                        name="subject"
+                        type="text"
+                        required
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="message" className="text-gray-900">
+                        Nachricht *
+                      </Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        required
+                        rows={6}
+                        value={formData.message}
+                        onChange={handleChange}
+                        className="mt-2 bg-neutral text-gray-900 border-gray-300"
+                        disabled={isSubmitting}
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground transition-all duration-200 ease-in-out text-base"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}
+                    </Button>
+                  </form>
+                )}
               </motion.div>
 
               <motion.div

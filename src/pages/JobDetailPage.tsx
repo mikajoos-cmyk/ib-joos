@@ -236,10 +236,10 @@ const JobDetailPage = () => {
                       </div>
                     )}
 
-                    {job.startDate && (
+                    {job.start_date && (
                       <div className="pt-6 border-t border-border">
                         <h4 className="font-semibold text-gray-900 mb-2">Startdatum</h4>
-                        <p className="text-gray-700">{job.startDate}</p>
+                        <p className="text-gray-700">{job.start_date}</p>
                       </div>
                     )}
                   </CardContent>

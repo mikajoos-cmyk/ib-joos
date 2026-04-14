@@ -20,7 +20,7 @@ const JobsAdmin = () => {
     requirements: [],
     benefits: [],
     salary: '',
-    startDate: '',
+    start_date: '',
   });
 
   useEffect(() => {
@@ -45,8 +45,18 @@ const JobsAdmin = () => {
 
   const handleSave = async () => {
     try {
+      const cleanedFormData = {
+        ...formData,
+        responsibilities: formData.responsibilities?.filter(item => item.trim() !== '') || [],
+        requirements: formData.requirements?.filter(item => item.trim() !== '') || [],
+        benefits: formData.benefits?.filter(item => item.trim() !== '') || []
+      };
+
       if (editingId === 'new') {
-        const { error } = await supabase.from('job_positions').insert([formData]);
+        const { error } = await supabase.from('job_positions').insert([{
+          ...cleanedFormData,
+          id: crypto.randomUUID()
+        }]);
         if (error) throw error;
         
         loadJobs();
@@ -55,7 +65,7 @@ const JobsAdmin = () => {
       } else if (editingId) {
         const { error } = await supabase
           .from('job_positions')
-          .update(formData)
+          .update(cleanedFormData)
           .eq('id', editingId);
         if (error) throw error;
         
@@ -106,14 +116,14 @@ const JobsAdmin = () => {
       requirements: [],
       benefits: [],
       salary: '',
-      startDate: '',
+      start_date: '',
     });
   };
 
   const handleArrayChange = (field: 'responsibilities' | 'requirements' | 'benefits', value: string) => {
     setFormData({
       ...formData,
-      [field]: value.split('\n').filter(item => item.trim() !== ''),
+      [field]: value.split('\n'),
     });
   };
 
@@ -181,11 +191,11 @@ const JobsAdmin = () => {
             </div>
 
             <div>
-              <Label htmlFor="startDate">Startdatum</Label>
+              <Label htmlFor="start_date">Startdatum</Label>
               <Input
-                id="startDate"
-                value={formData.startDate}
-                onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                id="start_date"
+                value={formData.start_date}
+                onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
                 className="mt-2"
                 placeholder="z.B. Ab sofort oder nach Vereinbarung"
               />

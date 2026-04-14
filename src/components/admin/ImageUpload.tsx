@@ -34,6 +34,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange, label = "Bil
         .upload(filePath, file);
 
       if (uploadError) {
+        if (uploadError.message.includes('row level security')) {
+          throw new Error('Berechtigung verweigert: Storage-Bucket RLS-Richtlinien fehlen (Bucket "ib_images").');
+        }
         throw uploadError;
       }
 
