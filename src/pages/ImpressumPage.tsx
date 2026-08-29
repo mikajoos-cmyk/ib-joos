@@ -3,11 +3,16 @@ import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+/*
+ * TODO: Wird nur vom derzeit deaktivierten Abschnitt "Berufsrechtliche Angaben"
+ * (weiter unten auskommentiert) benötigt. Bei Reaktivierung wieder einkommentieren.
+ *
 const Platzhalter = ({ children }: { children: React.ReactNode }) => (
   <span className="inline-block rounded border border-amber-400 bg-amber-100 px-1.5 py-0.5 text-sm font-medium text-amber-900">
     {children}
   </span>
 );
+*/
 
 const ImpressumPage = () => {
   useEffect(() => {
@@ -114,6 +119,17 @@ const ImpressumPage = () => {
                 </p>
               </div>
 
+              {/*
+                TODO: Abschnitt "Berufsrechtliche Angaben" – vorerst NICHT auf der Live-Seite.
+                Vor Reaktivierung klären, ob ein reglementierter Beruf / Kammerbezug vorliegt
+                (z. B. geführter Titel "Beratender Ingenieur" oder Bauvorlageberechtigung /
+                Pflichtmitgliedschaft in der Ingenieurkammer). Nur dann sind Berufsbezeichnung,
+                zuständige Kammer und berufsrechtliche Regelungen nach § 5 Abs. 1 Nr. 5 DDG Pflicht.
+                Angaben zur Berufshaftpflichtversicherung (§ 2 Nr. 11 DL-InfoV) sind offenzulegen,
+                sofern eine solche Versicherung besteht.
+                Danach: Platzhalter-Komponente (oben) wieder einkommentieren, folgende Platzhalter
+                ausfüllen und diesen Block wieder einkommentieren.
+
               <div>
                 <h2 className="text-2xl font-bold mb-4 text-gray-900">
                   Berufsrechtliche Angaben
@@ -151,6 +167,7 @@ const ImpressumPage = () => {
                   </p>
                 </div>
               </div>
+              */}
 
               <div>
                 <h2 className="text-2xl font-bold mb-4 text-gray-900">
