@@ -5,6 +5,8 @@ import ProjektePage from './pages/ProjektePage';
 import UeberUnsPage from './pages/UeberUnsPage';
 import KarrierePage from './pages/KarrierePage';
 import KontaktPage from './pages/KontaktPage';
+import ImpressumPage from './pages/ImpressumPage';
+import DatenschutzPage from './pages/DatenschutzPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import JobDetailPage from './pages/JobDetailPage';
 import AdminLoginPage from './pages/AdminLoginPage';
@@ -22,6 +24,8 @@ function App() {
         <Route path="/karriere" element={<KarrierePage />} />
         <Route path="/karriere/:id" element={<JobDetailPage />} />
         <Route path="/kontakt" element={<KontaktPage />} />
+        <Route path="/impressum" element={<ImpressumPage />} />
+        <Route path="/datenschutz" element={<DatenschutzPage />} />
         <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
         <Route path="/admin/*" element={<Navigate to="/admin/login" replace />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />

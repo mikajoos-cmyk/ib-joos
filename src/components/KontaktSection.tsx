@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import MapEmbed from './MapEmbed';
 
 const KontaktSection = () => {
   const ref = useRef(null);
@@ -211,18 +212,10 @@ const KontaktSection = () => {
               </div>
             </div>
 
-            <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2642.07548475765!2d9.3527794!3d48.53178510000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479992e53b94787d%3A0x7bd3a4e62a7c873!2sIngenieur%20B%C3%BCro%20Joos%20GmbH!5e0!3m2!1sde!2sde!4v1771323944099!5m2!1sde!2sde"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Ingenieurbüro Joos GmbH Location"
-              />
-            </div>
+            <MapEmbed
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2642.07548475765!2d9.3527794!3d48.53178510000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479992e53b94787d%3A0x7bd3a4e62a7c873!2sIngenieur%20B%C3%BCro%20Joos%20GmbH!5e0!3m2!1sde!2sde!4v1771323944099!5m2!1sde!2sde"
+              title="Ingenieurbüro Joos GmbH Standort"
+            />
           </motion.div>
         </div>
       </div>
